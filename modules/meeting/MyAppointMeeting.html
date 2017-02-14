@@ -1,0 +1,15 @@
+<div ng-controller="MyAppointMeeting">
+   <p>预约详情</p>
+    <div>
+    <p>会议室：{{meetingId}}</p>
+    <p>发起人：{{createName}}</p>
+    <p>会议主题：{{topic}}</p>
+    <p>会议日期：{{date}}</p>
+    <p>会议时间：{{time}}</p>
+    </div>
+    <div>
+       <button >邀请联系人</button><button >复制链接</button><button >下发短信</button>
+    </div>
+    <button ng-click="exitMyAppoint()">退出</button>
+
+</div>

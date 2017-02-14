@@ -1,0 +1,91 @@
+<!-- <div ng-controller="Login" > -->
+<div>
+<div class="login_outer" >
+    <div class="dragBar">
+    </div>
+    <div class="login_titlebar_btns">
+        <span title="最小化" class="btn min" ng-click="min_click()"></span>
+        <span title="关闭" class="btn exit" ng-click="quit()"></span></div>
+
+        <div class="login_pic"></div>
+        <div class="login_inner" >
+            <div class="checkUpdates" ng-show="showUpdate">
+                <div class="shadow"><i></i><span>正在检测新版本</span></div>
+            </div>
+            <div class="gForm" ng-show="showLgoin">
+                <div class="row"><i class="icon icon-username"></i><s></s><div class="f">
+                    <input placeholder="视讯号/手机号"  id="username" class="input_text"
+                           style="ime-mode:disabled;"
+                           type="text" onkeyup="value=value.replace(/[^\d]/g,'')" maxlength="11" name="username"
+                           ng-model="userName" value="{{hello}}" ng-focus="userNamePlaceholder = ''" ng-blur="userNamePlaceholder = '请输入用户名'">
+                </div>
+                    <span class="errTips" ng-show="showNameError">{{nameError}}</span>
+                </div>
+                <div class="row"><i class="icon icon-password"></i><s></s><div class="f">
+                    <input placeholder="密码"  class="input_text"
+                           style="ime-mode:disabled" onkeydown="if(event.keyCode==13)event.keyCode=9" onkeypress="if ((event.keyCode<48 || event.keyCode>57)) event.returnValue=false"
+                           maxlength="6" type="password" name="password"
+                           ng-model="passWord" ng-focus="passwordPlaceholder = ''" ng-blur="passwordPlaceholder = '请输入密码'">
+                </div><span class="errTips" ng-show="showPassError">{{pwdError}}</span></div>
+                <div><button type="button" id="btnLogin" style="margin-top:32px;margin-bottom:13px"  ng-class="btnclass"   ng-click="loginWithPwd()"><span>登录</span></button></div>
+                <div class="shade_div">
+                    <div class="shade_divWhite" ng-show="isShowShade"></div>
+                    <a class="fl gray-link" href="#resetPass">忘记密码？</a>
+                    <a class="blue-link fr" href="#reg">注册新账号</a>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+</div>
+
+
+    <div id="miniMask" ng-show="showMinMask"></div>
+
+    <!--<div class="miniDailog" id="installUpdate_1" ng-show="showupdate">-->
+        <!--<div class="msg">发现新版本V1.0</div>-->
+        <!--<div class="btns"><span class="btnCancel">取消</span><span class="blue btnInstall">立即安装</span></div>-->
+    <!--</div>-->
+
+
+    <div class="miniDailog" id="installUpdate_2" ng-show="showupdateforce">
+        <div class="msg">发现新版本{{vision}}</div>
+        <div class="btns"><span class="blue btnInstall" ng-click="install()">立即安装</span></div>
+    </div>
+
+
+    <div class="miniDailog" id="updateProgress" ng-show="showprogress">
+        <div class="progress">
+            <div class="bar" ng-style="extraStyle"></div>
+            <span class="text">发现新版本，正在下载安装包...{{progress}}</span>
+        </div>
+    </div>
+
+    <div class="miniDailog" id="installUpdate_1" ng-show="showRedownload">
+        <div class="msg">下载失败，请重试!</div>
+        <div class="btns"><span class="btnCancel" ng-click="redownLoad()">重试</span><span class="blue btnInstall" ng-click="quit()">取消</span></div>
+    </div>
+    <div class="miniDailog" id="installUpdate" style="border:1px #ebedf0 solid"  ng-show="showRegetNps">
+        <div class="msg">{{popMsg}}</div>
+        <div class="btns"><span class="btnCancel" ng-click="regetNps()">重试</span><span class="blue btnInstall" ng-click="quit()">取消</span></div>
+    </div>
+    <div class="miniDailog" id="installUpdate_3" style="border:1px #ebedf0 solid"  ng-show="showRegetConfig">
+        <div class="msg">安装包不完整，请重新下载安装包!</div>
+        <div class="btns"><span class="btnCancel" ng-click="regetConfig()">重试</span><span class="blue btnInstall" ng-click="quit()">取消</span></div>
+    </div>
+    <div class="miniDailog" id="installUpdate_6" style="border:1px #ebedf0 solid"  ng-show="showFreeSystemSpace">
+        <div class="msg">本地磁盘空间不足，无法启动应用，<br>请清理磁盘后重试</div>
+        <div class="btns"><span class="btnCancel" ng-click="regetFreeSize()">重试</span><span class="blue btnInstall" ng-click="quit()">取消</span></div>
+    </div>
+    <div class="miniDailog" id="installUpdate_4" style="border:1px #ebedf0 solid"  ng-show="showCopyConfig">
+        <div class="msg">配置文件拷贝失败!</div>
+        <div class="btns"><span class="btnCancel" ng-click="regetConfig()">重试</span><span class="blue btnInstall" ng-click="quit()">取消</span></div>
+    </div>
+    <div class="loginabToast" ng-show="isShowToast">
+        {{toastMsg}}
+    </div>
+
+</div>

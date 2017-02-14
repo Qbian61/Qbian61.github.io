@@ -1,0 +1,219 @@
+<div ng-controller="reg">
+
+
+<style>
+		html {color:#000;background:#FFF}
+		body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td {margin:0;padding:0}
+		table {border-collapse:collapse;border-spacing:0}
+		fieldset,img {border:0}
+		:focus { outline: 0; }
+		address,caption,cite,code,dfn,em,strong,th,var {font-style:normal;font-weight:400}
+		ol,ul {list-style:none}
+		caption,th {text-align:left}
+		h1,h2,h3,h4,h5,h6 {font-size:100%;font-weight:400}
+		q:before,q:after {content:''}
+		abbr,acronym {border:0;font-variant:normal}
+		sup {vertical-align:text-top}
+		sub {vertical-align:text-bottom}
+		input,textarea,select,button  {font-family:inherit;font-size:inherit;font-weight:inherit;}
+		legend {color:#000}
+		.clearfix:before,.clearfix:after {content:"";display:table}
+		.clearfix:after {clear:both}
+		.text-overflow {overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+		.webkit-adjust {-webkit-text-size-adjust:none}
+		body {color:#666;font:13px/1.5 tahoma,Arial,"Microsoft Yahei",sans-serif;position:relative;-webkit-font-smoothing:antialiased}
+		a {text-decoration:none;}
+		a:hover {text-decoration:none;cursor:pointer;}
+
+		html, body{-webkit-user-select:none;height:100%;overflow:hidden;}
+		a.normal{color:#1f9db1;border-bottom:1px #1f9db1 solid;}
+
+
+		.titlebar_btns{position:absolute;right:0;top:0;overflow:hidden;}
+		.titlebar_btns span{float:left;width:24px;height:24px;margin:8px 8px 0 0;background-repeat:no-repeat;background-position:center}
+		.titlebar_btns span.min{background-image:url(images/home/min.png)}
+		.titlebar_btns span.min:hover{background-image:url(images/home/min_hover.png)}
+		.titlebar_btns span.min:active{background-image:url(images/home/min_active.png)}
+
+		.titlebar_btns span.rest{background-image:url(images/home/rest.png)}
+		.titlebar_btns span.rest:hover{background-image:url(images/home/rest_hover.png)}
+		.titlebar_btns span.rest:active{background-image:url(images/home/rest_active.png)}
+
+		.titlebar_btns span.max{background-image:url(images/home/max.png)}
+		.titlebar_btns span.max:hover{background-image:url(images/home/max_hover.png)}
+		.titlebar_btns span.max:active{background-image:url(images/home/max_active.png)}
+
+		.titlebar_btns span.exit{background-image:url(images/home/exit.png)}
+		.titlebar_btns span.exit:hover{background-image:url(images/home/exit_hover.png)}
+		.titlebar_btns span.exit:active{background-image:url(images/home/exit_active.png)}
+
+
+
+		.gForm{}
+		.gForm .fl{float:left;}
+		.gForm .fr{float:right;}
+		.gForm .input_text{border:none;width:100%;height:22px;line-height:22px;font-size:14px;float:left;margin-top:11px}
+		.gForm .input_btn{cursor:pointer;background-color:#34bbca;border:none;color:#fff;font-size:16px;width:100%;border-radius:3px;line-height:36px}
+		.gForm .gray-link{color:#a4aabb}
+		.gForm .blue-link{color:#34bbca;border-bottom:1px #34bbca solid}
+
+		.gForm .row{border-bottom:1px #e0e6ec solid;min-height:44px;line-height:44px;position:relative;}
+		.gForm .row s{height:22px;width:1px ;background-color:#e0e6ec;text-decoration:none;left:30px;top:11px;position:absolute;}
+		.gForm .row .icon{width:18px;height:18px;position:absolute;top:13px;left:5px;background-repeat:no-repeat;background-size:18px 18px}
+		.gForm .row .icon-username{background-image:url(images/login/icon_username.png)}
+		.gForm .row .icon-password{background-image:url(images/login/icon_password.png)}
+		.gForm .row .f{margin-left:42px;overflow:hidden;}
+
+
+		body{background:url(images/login/reg_bg.png) no-repeat;background-size:100% 100%}
+		.logo{width:66px;height:28px;background:url(images/login/reg_logo.png) no-repeat;top:20px;left:26px;position:absolute;}
+		.title1{font-size:20px;color:#333;position:absolute;top:80px;left:72px;}
+		.outer{position:absolute;top:230px;right:0;left:0;}
+		.outer .left{position:absolute;left:0;top:0;width:50%;text-align:center;height:100%;}
+		.outer .mid{width:1px;background-color:#dfdfdf;position:absolute;left:50%;top:10%;bottom:10%}
+		.outer .right{position:absolute;left:50%;top:0;width:50%;height:100%}
+
+		.outer .full{position:absolute;left:0;top:0;width:100%;height:100%}
+		.easyForm .row .errTips{position:absolute;z-index:55;background-color:#d0dde5;border-radius:4px;min-width:160px;left:0;top:55px;font-size:14px;color:#595a5d;padding:6px 10px;text-align:center}
+		.easyForm .row .errTips:after{position:absolute;content:"";width:10px;height:10px;background-color:#d0dde5;transform:rotate(45deg) translateX(-50%);left:10%;top:0px}
+
+		.easyForm{}
+		.easyForm input,.easyForm button,.easyForm textarea{box-sizing:border-box}
+		.easyForm .row{margin-bottom:17px;position:relative}
+		.easyForm .row .desc{height:18px;}
+		.easyForm .row .desc span{left:1px;position:absolute;color:#aeaeae;top:56px;}
+
+		.easyForm .input_txt{border:1px #ccc solid;border-radius:4px;height:50px;line-height:50px;padding:0 10px;width:100%;color:#999;font-size:15px;}
+		.easyForm .input_txt:focus{border-color:#3dbbc9; box-shadow:0px 0px 4px #d9d9d9 inset;}
+
+		.easyForm .input_btn{cursor:pointer;background-color:#3dbbc9;border-radius:4px;height:50px;border:none;color:#fff;font-size:18px;width:100%}
+		.easyForm .input_btn span{display:inline-block;}
+		.easyForm .input_btn:hover{background-color:#3da9b4}
+		.easyForm .input_btn:active{box-shadow:-2px 2px 5px #197983 inset; }
+		.easyForm .input_btn.waiting,.easyForm .input_btn.waiting:hover,.easyForm .input_btn.waiting:active{background-color:#d8dfe6;box-shadow:none}
+		.easyForm .input_btn.waiting:after{vertical-align:middle;margin-left:8px;display:inline-block;width:16px;height:16px;content:"";background:url(images/btn_waiting.gif) no-repeat}
+
+		.easyForm .chk{color:#aeaeae}
+		.easyForm .chk a{color:#1f9db1;}
+		.easyForm .chk label,.easyForm .chk span{display:inline-block;vertical-align:middle}
+
+		.custom_checkbox{display:none;}
+		.custom_checkbox + label {
+			background-color: #fff;
+			border: 1px solid #C1CACA;
+			padding: 7px;
+			border-radius: 2px;
+			display: inline-block;
+			position: relative;
+		}
+		.custom_checkbox + label:active {
+			box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+		}
+
+		.custom_checkbox:checked + label {
+			background-color: #1f9db1;
+			border: 1px solid #1f9db1;
+		}
+
+		.custom_checkbox:checked + label:after {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform:translate(-50%,-50%);
+			width:12px;
+			height:8px;
+			background:url(images/setting/custom_chk_1.png) no-repeat;
+		}
+		.reg_progress{position:absolute;top:160px;left:72px;right:72px;}
+		.reg_progress ul{width:100%;border-bottom:1px #ccc solid;height:12px;}
+		.reg_progress li{width:33.33%;float:left;position:relative;color:#a0a0a0;height:12px}
+		.reg_progress li span{text-align:center;width:100%;position:absolute;top:-35px;color:#a0a0a0;font-size:16px;}
+		.reg_progress li em{background-color:#fff;font-size:15px;font-family:verdana;position:absolute;left:50%;top:0px;margin-left:-12px;border:1px #a0a0a0 solid;border-radius:100%;width:22px;height:22px;line-height:22px;text-align:center;}
+		.reg_progress li.current span{color:#249fb3;font-size:18px;top:-37px;}
+		.reg_progress li.current em{color:#249fb3;border-color:#249fb3;width:24px;height:24px;line-height:24px;margin-left:-13px;top:-1px;}
+
+		#reg_step1,#reg_step2,#reg_step3{}
+	</style>
+<!-- 注册 -->
+<div class="logo"></div>
+
+<div class="dragBar" style="position: absolute;left: 0px;top:0px;right: 100px;height: 30px; -webkit-app-region: drag"></div>
+<div class="titlebar_btns"><span title="最小化" class="btn min"  ng-click="min_click()"></span><span title="最大化" class="btn max" ng-click="max_click()"></span></span><span title="关闭" class="btn exit" ng-click="btn_exit()"></span></div>
+
+<div class="title1">注册账号</div>
+
+<div class="reg_progress">
+	<ul>
+		<li id="list1"><span>设置账号/密码</span><em>1</em></li>
+		<li id="list2"><span>验证身份</span><em>2</em></li>
+		<li id="list3"><span>完善资料</span><em>3</em></li>
+	</ul>
+</div>
+
+<div class="outer">
+	<div class="full">
+		<div style="width:368px;margin:0 auto;">
+			<div class="easyForm">
+
+			<!--   show_step1-->
+				<form id="reg_step1" ng-show="show_step1">
+					<div class="row clearfix"><input type="text" id="phoneno" placeholder="请输入手机号" onkeyup="value=value.replace(/[^\d]/g,'')"  maxlength="11" ng-model="phone" class="input_txt"> <span class="errTips" ng-show="showPhoneError">{{phoneError}}</span></div>
+					<div class="row clearfix"><input type="password" placeholder="请设置密码" maxlength="6" onkeypress="if ((event.keyCode<48 || event.keyCode>57)) event.returnValue=false" ng-model="password" class="input_txt"><p class="desc"><span>密码由6位数字组成</span></p><span class="errTips" ng-show="showPwdError" >{{pwdError}}</span></div>
+					<div class="row clearfix"><input type="password" placeholder="请确认密码" maxlength="6" onkeypress="if ((event.keyCode<48 || event.keyCode>57)) event.returnValue=false" ng-model="confrompwd" class="input_txt"><span class="errTips" ng-show="showContromError">{{conformError}}</span></div>
+					<!--<div class="row clearfix" >
+						<label class="chk" ng-show="true">
+							<input id="chk_1" class="custom_checkbox" type="checkbox" checked="checked" ng-model="checked">
+							<label for="chk_1"></label>
+							<span >同意<a target="_blank" href="agreement.html">《服务协议》</a>和<a target="_blank" href="privacy.html">《隐私声明》</a><span class="errTips" ng-show="showCheckboxError" style="top:28px; left:-15px;">{{checkboxError}}</span></span>
+						</label>
+					</div>-->
+					<div class="row clearfix"><button type="button"  ng-click="step2()" class="input_btn nextbtn " ng-class="step1class"><span>下一步</span><span class="errTips" ng-show="showSmsError">{{smsError}}</span></button></div>
+				</form>
+
+				<form id="reg_step2" ng-show="show_step2">
+					<div class="row clearfix" style="height:140px"><input type="text" id="rg_sms_code" maxlength="6" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="请输入短信验证码" ng-model="sms_code" class="input_txt" style="width:54%;float:left;"><div style="width:45%;float:right"><div style="margin-left:10px"><button type="button"   ng-disabled="cansend" class="input_btn " ng-class="smsclass" ng-click="resendsms()" ><span>获取验证码{{minutes}}</span></button></div></div><span class="errTips" ng-show="showSmsError">{{smsError}}</span></div>
+					<div class="row clearfix"><button type="submit"  ng-click="step3()" class="input_btn nextbtn "  ng-disabled="disableStep2" ng-class="step2class"><span>下一步</span></button></div>
+				</form>
+				<!--show_step3 -->
+				<form id="reg_step3" ng-show="show_step3">
+					<div class="row clearfix" style="height:140px"><input type="text" id="regnickid" oninput="reglengthchange(value)" placeholder="请输入昵称（中英文或数字组成）"  ng-model="nick_name" class="input_txt"><p class="desc"><span>昵称由中英文或数字组成，最多支持10个字符</span></p><span class="errTips" ng-show="showNamerror">{{nameError}}</span></div>
+					<div class="row clearfix"><button type="button"  ng-click="finishreg()" class="input_btn finishbtn " ng-class="step3class"><span>完成注册</span></button></div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--<script>-->
+	<!--function reset(){-->
+		<!--$("#reg_step1").hide();-->
+		<!--$("#reg_step2").hide();-->
+		<!--$("#reg_step3").hide();-->
+	<!--}-->
+
+	<!--$("#reg_step1").show();-->
+	<!--$(".reg_progress li").eq(0).addClass("current").siblings().removeClass("current");-->
+
+	<!--$("#reg_step1 .nextbtn").click(function(){-->
+		<!--reset();-->
+		<!--$("#reg_step2").show();-->
+		<!--$(".reg_progress li").eq(1).addClass("current").siblings().removeClass("current");-->
+		<!--return false;-->
+	<!--});-->
+
+	<!--$("#reg_step2 .nextbtn").click(function(){-->
+		<!--reset();-->
+		<!--$("#reg_step3").show();-->
+		<!--$(".reg_progress li").eq(2).addClass("current").siblings().removeClass("current");-->
+		<!--return false;-->
+	<!--});-->
+
+	<!--$("#reg_step3 .finishbtn").click(function(){-->
+		<!--alert('完成注册');-->
+		<!--return false;-->
+	<!--});-->
+<!--</script>-->
+</div>
+

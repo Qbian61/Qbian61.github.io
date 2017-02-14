@@ -1,0 +1,59 @@
+<div class="main_right" >
+
+        <div class="meeting_search">
+            <div class="title_page">我的会议</div>
+            <div class="search" ng-class="inputclass">
+                <input id="inputMeetingNum"  type="text" ng-keyup="inputLength()"  placeholder="输入会议号加入会议" ng-focus="inputOnfocus()" ng-blur="inputOnblur()" ng-model="meetingnumber" class="search_key ">
+                <span title="加入会议" id="joinbtn"  class="search_btn dis"  ng-click="joinMeeting()"></span>
+
+                <div class="loading"></div>
+            </div>
+            <div class="btns" >
+                <button type="button" class="btn_ljzk" ng-class="callClass" data-toggle="modal" data-target="#myModal">
+                    <span><em class="icon_meeting"></em>召开</span>
+                </button>
+                <button class="btn_yyhy">
+                    <span><em class="icon_meetingTime"></em>预约</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="meeting_list">
+            <div ng-hide="hideMeetingList" ng-cloak class="table">
+                <div class="tr" ng-repeat="x in meetings">
+                    <div class="td pic"><em class=""></em></div>
+                    <div class="td name">{{ x.creatorName }}</div>
+                    <!-- <div class="td name_order">{{ x.meetingId }}</div> -->
+                    <div class="td num"><span class="password" ng-show = 'x.hasMeetingPwd === 1'></span><span class="fr_90">{{ x.meetingId }}</span></div>
+                    <div class="td time">{{ x.createTime }}</div>
+                    <div class="td details"><a class="btnJoin" id="btn_{{x.meetingId}}" >加入</a></div>
+
+                    <!-- <div class="td manage"><a class="btnJoin" ng-show="isShowJoinBtn">加入</a></div> -->
+                </div>
+            </div>
+
+        </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
