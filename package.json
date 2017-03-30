@@ -1,0 +1,25 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "Just a blogging platform.",
+  "author": "Qbian",
+  "homepage": "http://qbian.org",
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/qbian61/blog.git"
+  },
+  "main": "./index.html",
+  "scripts": {
+    "start": "node index",
+    "test": "grunt validate --verbose"
+  },
+  "engines": {
+    "node": ">=0.10.1"
+  },
+  "dependencies": {
+    "bootstrap": ">=3.0.0 <4.0.0"
+
+  }
+
+}
