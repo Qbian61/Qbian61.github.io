@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" ng-app="app">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,8 +23,12 @@
       <script src="//cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="//cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+
+    <!-- ANGULARJS SCRIPT -->
+    <script type="text/javascript" src="./js/angular.min.js"></script>
+
   </head>
-  <body>
+  <body ng-controller="contr" ng-init="init()">
   <!-- =========================
   HEADER
   ============================== -->
@@ -39,15 +43,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="#"><img src="./img/home.jpeg" alt="Qbian with a Local logo" class="logoSticky"></a>
+          <a href="#" ng-click="init()"><img src="./img/home.jpeg" alt="Qbian with a Local logo" class="logoSticky"></a>
         </div>
 
         <div class="navbar-collapse collapse" id="pwal-navigation">
           <ul class="nav navbar-nav navbar-right main-navigation">
-            <li><a href="#">主页</a></li>
-            <li><a href="#">关于</a></li>
-            <li><a href="#">博客</a></li>
-            <li><a href="#">简介</a></li>
+            <li><a href="#" id="home" ng-click="tabClick('./template/home.html')">主页</a></li>
+            <li><a href="#" id="about" ng-click="tabClick('./template/about.html')">关于</a></li>
+            <li><a href="#" id="blog" ng-click="tabClick('./template/blog.html')">博客</a></li>
+            <li><a href="#" id="intro" ng-click="tabClick('./template/intro.html')">简介</a></li>
           </ul>
         </div>
       </div>
@@ -57,35 +61,10 @@
   <!-- =========================
   BODY CONTAINER
   ============================== -->
-  <div class="" style="background:white;min-height:370px;text-align:center;padding:10px;">
+  <div class="" style="background:white;text-align:center;padding:10px;">
     <div class="container">
-      <div class="row" id="content">
-
-
-        <div class="col-xs-12 col-sm-12" style="border:1px solid red;">
-            <p>Hello world!</p>
-            <p>Hello world!</p>
-            <p>Hello world!</p>
-            <p>Hello world!</p>
-            <p>Hello world!</p>
-            <p>Hello world!</p>
-            <p>Hello world!</p>
-        </div>
-        <div class="col-xs-12 col-sm-6" style="border:1px solid red;">
-            Hello world!
-        </div>
-        <div class="col-xs-12 col-sm-6" style="border:1px solid red;">
-            Hello world!
-        </div>
-        <div class="col-xs-12 col-sm-6" style="border:1px solid red;">
-            Hello world!
-        </div>
-        <div class="col-xs-12 col-sm-6" style="border:1px solid red;">
-            Hello world!
-        </div>
-
-
-
+      <div class="row" ng-include="content">
+        <!-- The content here . -->
       </div>
     </div>
   </div>
@@ -135,7 +114,7 @@
       <div class="container">
           <div class="row">
               <div class="col-sm-12">
-                  <span>Copyright &copy; <a href="https://qbian61.github.io">Qbian</a></span>
+                  <span>Copyright &copy; <a href="#" ng-click="init()">Qbian</a></span>
               </div>
           </div>
       </div>
@@ -146,6 +125,21 @@
   ============================== -->
   <script src="./js/jquery.min.js"></script>
   <script src="./js/bootstrap.min.js"></script>
+
+  <script type="text/javascript">
+    angular.module('app', [])
+      .controller('contr', ['$scope', function($scope) {
+
+        $scope.init = function() {
+          $scope.content = './template/home.html';
+        };
+
+        $scope.tabClick = function(url) {
+          $scope.content = url;
+        };
+
+      }]);
+  </script>
 
   </body>
 </html>
