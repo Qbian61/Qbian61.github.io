@@ -103,8 +103,8 @@ h2 {
 }
 
 h3 {
-    font-size: 18px;
-    line-height: 38px;
+    font-size: 30px;
+    line-height: 48px;
     font-weight: 300;
 }
 
@@ -172,6 +172,36 @@ header .navbar {
 
 header .navbar .navbar-header {
     float: none;
+}
+
+.home {
+  background:#222;
+  background-repeat:no-repeat;
+  background-position:center 0;
+  -webkit-background-size:cover;
+  background-size:cover;
+  padding:108px 50px 0 50px;
+  text-align:center;
+  min-height:400px;
+  position:relative
+}
+
+.intro {
+  background:#222;
+  background-repeat:no-repeat;
+  background-position:center 0;
+  -webkit-background-size:cover;
+  background-size:cover;
+  padding:68px 0 0;
+  text-align:center;
+  min-height:400px;
+  position:relative
+}
+
+.inner-content {
+  background: white;
+  text-align: center;
+  padding: 10px;
 }
 
 /*---------------------------------------
