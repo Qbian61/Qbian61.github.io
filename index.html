@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
 
-    <title>Qbian Blog</title>
+    <title>Qbian的个人博客</title>
     <meta name="description" content="Qbian的个人博客，记录成长！" />
     <meta name="theme-color" content="#ffffff">
 
@@ -111,7 +111,7 @@
       <div class="container">
           <div class="row">
               <div class="col-sm-12">
-                  <span>Copyright &copy; <a href="#" ng-click="init()">Qbian</a></span> | Contact : 944398239@qq.com
+                  <span>Copyright &copy; <a href="#" ng-click="init()">Qbian</a></span> |  Contact : 15620608572@163.com
               </div>
           </div>
       </div>
@@ -122,10 +122,31 @@
   ============================== -->
   <script src="./js/jquery.min.js"></script>
   <script src="./js/bootstrap.min.js"></script>
+  <script src="./js/datasource.js"></script>
 
   <script type="text/javascript">
     angular.module('app', [])
       .controller('contr', ['$scope', function($scope) {
+
+        var tags = window.qbian.tags;
+
+        angular.forEach(tags, function(tag, tagIndex, tagsArr) {
+          angular.forEach(window.qbian.sources, function(source, sourceIndex, sourceArr) {
+            var flag = false;
+            for(var i = 0, len = source.tags.length; i < len; ++ i) {
+              if(source.tags[i] === tag.name) {
+                flag = true;
+              }
+            }
+
+            if(flag) {
+              tag.sources.push(source.source);
+            }
+
+          });
+        });
+        console.info(tags);
+        $scope.datasource = tags;
 
         $scope.init = function() {
           $scope.content = './template/home.html';
