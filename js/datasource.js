@@ -115,6 +115,9 @@ window.qbian = {};
     }, {
       name : 'Nginx',
       sources : []
+    }, {
+      name : 'Android',
+      sources : []
     }
   ];
 
