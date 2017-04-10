@@ -24,7 +24,7 @@
       <script src="//cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
-    
+
 
   </head>
   <body ng-controller="contr" ng-init="init()">
@@ -86,15 +86,7 @@
                   <div class="widget">
                       <h4 class="title">相关技能</h4>
                       <div class="content tag-cloud">
-                          <a href="http://blog.csdn.net/qbian/article/category/6552103" title="csdn Java" target="_blank">Java</a>
-                          <a href="http://blog.csdn.net/qbian/article/category/6577158" title="csdn JVM" target="_blank">JVM</a>
-                          <a href="http://blog.csdn.net/qbian/article/category/6636640" title="csdn JavaScript" target="_blank">JavaScript</a>
-                          <a href="http://my.csdn.net/qbian" title="csdn Android" target="_blank">Android</a>
-                          <a href="http://blog.csdn.net/qbian/article/category/6552276" title="csdn Spring" target="_blank">Spring</a>
-                          <a href="http://blog.csdn.net/qbian/article/category/6831038" title="csdn Spring Boot" target="_blank">Spring Boot</a>
-                          <a href="http://blog.csdn.net/qbian/article/category/6552293" title="csdn MySQL" target="_blank">MySQL</a>
-                          <a href="http://blog.csdn.net/qbian/article/category/6649177" title="csdn AngularJs" target="_blank">AngularJs</a>
-                          <a href="http://blog.csdn.net/qbian/article/category/6672364" title="csdn Nginx" target="_blank">Nginx</a>
+                        <a ng-repeat="tag in datasource" href="{{tag.src}}" title="csdn {{tag.name}}" target="_blank">{{tag.name}}</a>
                       </div>
                   </div>
               </div>

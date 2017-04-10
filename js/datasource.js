@@ -9,6 +9,18 @@ window.qbian = {};
   qbian.sources = [
     {
       source : {
+        title : 'git push 报 The requested URL returned error: 403 错误',
+        href : 'http://blog.csdn.net/qbian/article/details/70032306'
+      },
+      tags : ['Git'],
+    },{
+      source : {
+        title : 'RabbitMQ的消息路由基本讲解',
+        href : 'http://blog.csdn.net/qbian/article/details/70038599'
+      },
+      tags : ['MQ'],
+    },{
+      source : {
         title : 'spring MVC 的 web.xml 配置讲解',
         href : 'http://blog.csdn.net/qbian/article/details/53431813'
       },
@@ -93,30 +105,47 @@ window.qbian = {};
   qbian.tags = [
     {
       name : 'Java',
+      src : 'http://blog.csdn.net/qbian/article/category/6552103',
       sources : []
     }, {
       name : 'JVM',
+      src : 'http://blog.csdn.net/qbian/article/category/6577158',
       sources : []
     }, {
       name : 'JavaScript',
+      src : 'http://blog.csdn.net/qbian/article/category/6636640',
       sources : []
     }, {
       name : 'Spring',
+      src : 'http://blog.csdn.net/qbian/article/category/6552276',
       sources : []
     }, {
       name : 'Spring Boot',
+      src : 'http://blog.csdn.net/qbian/article/category/6831038',
       sources : []
     }, {
       name : 'AngularJs',
+      src : 'http://blog.csdn.net/qbian/article/category/6649177',
       sources : []
     }, {
       name : 'MySQL',
+      src : 'http://blog.csdn.net/qbian/article/category/6552293',
       sources : []
     }, {
       name : 'Nginx',
+      src : 'http://blog.csdn.net/qbian/article/category/6672364',
+      sources : []
+    }, {
+      name : 'Git',
+      src : 'http://blog.csdn.net/qbian/article/category/6852262',
+      sources : []
+    }, {
+      name : 'MQ',
+      src : 'http://blog.csdn.net/qbian/article/category/6852264',
       sources : []
     }, {
       name : 'Android',
+      src : 'http://blog.csdn.net/qbian/article/category/6852298',
       sources : []
     }
   ];
