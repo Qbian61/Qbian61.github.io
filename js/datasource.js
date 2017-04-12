@@ -9,6 +9,12 @@ window.qbian = {};
   qbian.sources = [
     {
       source : {
+        title : 'AngularJs的controller 多次执行问题',
+        href : 'http://blog.csdn.net/qbian/article/details/70139381'
+      },
+      tags : ['JavaScript', 'AngularJs'],
+    },{
+      source : {
         title : 'RabbitMQ demo及其详解',
         href : 'http://blog.csdn.net/qbian/article/details/70139227'
       },
