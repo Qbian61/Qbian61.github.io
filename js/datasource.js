@@ -9,6 +9,12 @@ window.qbian = {};
   qbian.sources = [
     {
       source : {
+        title : 'RabbitMQ demo及其详解',
+        href : 'http://blog.csdn.net/qbian/article/details/70139227'
+      },
+      tags : ['MQ', 'Spring Boot'],
+    },{
+      source : {
         title : 'git push 报 The requested URL returned error: 403 错误',
         href : 'http://blog.csdn.net/qbian/article/details/70032306'
       },
