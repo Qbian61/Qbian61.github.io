@@ -9,6 +9,12 @@ window.qbian = {};
   qbian.sources = [
     {
       source : {
+        title : '如何保证RabbitMQ的消息不丢失',
+        href : 'http://www.jianshu.com/p/558c4b6b8d26'
+      },
+      tags : ['MQ'],
+    },{
+      source : {
         title : 'AngularJs的controller 多次执行问题',
         href : 'http://blog.csdn.net/qbian/article/details/70139381'
       },
