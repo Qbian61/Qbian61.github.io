@@ -9,6 +9,12 @@ window.qbian = {};
   qbian.sources = [
     {
       source : {
+        title : '拿走即用的spring mvc整合mybatis（crud＋分页插件）操作mysql',
+        href : 'http://www.jianshu.com/p/f32c58b683fe'
+      },
+      tags : ['Java', 'Spring'],
+    },{
+      source : {
         title : '如何保证RabbitMQ的消息不丢失',
         href : 'http://www.jianshu.com/p/558c4b6b8d26'
       },
