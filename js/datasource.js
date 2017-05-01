@@ -9,6 +9,12 @@ window.qbian = {};
   qbian.sources = [
     {
       source : {
+        title : '将输入流(InputStream)对象保存到数据库(mysql)',
+        href : 'http://www.jianshu.com/p/ecfbfca1011e'
+      },
+      tags : ['Java', 'Spring', 'MySQL'],
+    },{
+      source : {
         title : '浅谈WEB安全之DDoS攻击',
         href : 'http://www.jianshu.com/p/3041b0ddb57d'
       },
