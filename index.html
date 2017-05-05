@@ -86,7 +86,7 @@
                   <div class="widget">
                       <h4 class="title">相关技能</h4>
                       <div class="content tag-cloud">
-                        <a ng-repeat="tag in datasource" href="{{tag.src}}" title="csdn {{tag.name}}" target="_blank">{{tag.name}}</a>
+                        <a ng-repeat="tag in datasource" href="{{tag.src}}" title="csdn {{tag.name}}" target="_blank" ng-bind="tag.name"></a>
                       </div>
                   </div>
               </div>
