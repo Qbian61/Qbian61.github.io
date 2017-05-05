@@ -9,6 +9,18 @@ window.qbian = {};
   qbian.sources = [
     {
       source : {
+        title : '虚拟机内elasticsearch集群的详细安装过程',
+        href : 'http://www.jianshu.com/p/030ebacbf279'
+      },
+      tags : ['Elasticsearch'],
+    },{
+      source : {
+        title : 'web开发者不可不知的网络知识',
+        href : 'http://www.jianshu.com/p/541dfbe5a6f5'
+      },
+      tags : ['Java'],
+    },{
+      source : {
         title : '将输入流(InputStream)对象保存到数据库(mysql)',
         href : 'http://www.jianshu.com/p/ecfbfca1011e'
       },
@@ -182,6 +194,10 @@ window.qbian = {};
     }, {
       name : 'Web安全',
       src : 'http://blog.csdn.net/qbian/article/category/6890030',
+      sources : []
+    }, {
+      name : 'Elasticsearch',
+      src : 'http://blog.csdn.net/qbian/article/category/6896682',
       sources : []
     }, {
       name : 'Android',
