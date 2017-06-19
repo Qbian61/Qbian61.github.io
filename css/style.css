@@ -106,6 +106,7 @@ h3 {
     font-size: 30px;
     line-height: 48px;
     font-weight: 300;
+    margin-top:0px;
 }
 
 h4 {
@@ -118,6 +119,11 @@ h5 {
     font-size: 18px;
     font-weight: 300;
     color: #ffffff;
+}
+
+hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /*---------------------------------------
@@ -203,7 +209,14 @@ header .navbar .navbar-header {
   text-align: center;
   padding: 10px;
 }
-
+.introd {
+  background: white;
+  text-align: left;
+  padding: 10px;
+}
+.box {
+  padding:10px;
+}
 /*---------------------------------------
    footer style
 -----------------------------------------*/
