@@ -6,22 +6,34 @@
     <script type="text/javascript">
       // location.href = 'http://qbian.me';
     </script>
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+
   </head>
   <body>
     <div id="content"></div>
 
-    <script type="text/javascript">
-      fetch('./README.md').then(function(response) {
-        console.info('[before]response info', response);
-        response = JSON.stringify(response);
-        console.info('[after]response info', response);
+<script type="text/javascript">
+$(function() {
+  $.ajax({
+    method: 'GET',
+    url: './README.md',
+    contentType: 'text/plain',
+    success: function(res) {
+      console.info('[before]response info', response);
+      response = JSON.stringify(response);
+      console.info('[after]response info', response);
+    }
+  });
+});
+// fetch('./README.md').then(function(response) {
+//   console.info('[before]response info', response);
+//   response = JSON.stringify(response);
+//   console.info('[after]response info', response);
+//
+//   document.getElementById('content').innerHTML = response;
+//
+// });
 
-        document.getElementById('content').innerHTML = response;
-
-      }, function() {
-
-      });
-
-    </script>
+</script>
   </body>
 </html>
