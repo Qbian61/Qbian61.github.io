@@ -12,11 +12,12 @@
 
     <script type="text/javascript">
       fetch('./README.md').then(function(response) {
+        console.info('[before]response info', response);
         response = JSON.stringify(response);
-        console.info('response info', response);
+        console.info('[after]response info', response);
 
         document.getElementById('content').innerHTML = response;
-        
+
       }, function() {
 
       });
