@@ -4,10 +4,14 @@
     <meta charset="utf-8">
     <title>Qbian</title>
     <script type="text/javascript">
-      location.href = 'http://qbian.me';
+      // location.href = 'http://qbian.me';
     </script>
   </head>
   <body>
+    <div id="content"></div>
 
+    <script type="text/javascript">
+      document.getElementById('content').innerHTML = fetch('https://github.com/Qbian61/Qbian61.github.io/blob/master/README.md');
+    </script>
   </body>
 </html>
