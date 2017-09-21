@@ -18,7 +18,7 @@ $(function() {
     method: 'GET',
     url: './README.md',
     contentType: 'text/plain',
-    success: function(res) {
+    success: function(response) {
       console.info('[before]response info', response);
       response = JSON.stringify(response);
       console.info('[after]response info', response);
