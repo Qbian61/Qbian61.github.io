@@ -3,37 +3,41 @@
   <head>
     <meta charset="utf-8">
     <title>Qbian</title>
-    <script type="text/javascript">
-      // location.href = 'http://qbian.me';
-    </script>
     <script type="text/javascript" src="./js/jquery.min.js"></script>
-    <script type="text/javascript" src="./js/marked.js"></script>
+    <script type="text/javascript">
+    var content = '';
+    $(function() {
+      $.ajax({
+        method: 'GET',
+        url: './mks/qbian-express.md',
+        contentType: 'text/plain',
+        success: function(response) {
+          // console.info('[before]response info', response);
+          content = response;
+        }
+      });
+    });
+    </script>
 
-  </head>
-  <body>
-    <div id="content"></div>
+    <xmp id="content" theme="united" style="display:none;"></xmp>
+    <div id="ctx"></div>
+    <script>
+      var interval = setInterval(function() {
+        console.info('set Interval .');
+        if(content != '') {
+          console.info('clear Interval .');
+          window.clearInterval(interval);
 
-<script type="text/javascript">
-$(function() {
-  $.ajax({
-    method: 'GET',
-    url: './README.md',
-    contentType: 'text/plain',
-    success: function(response) {
-      console.info('[before]response info', response);
-      document.getElementById('content').innerHTML = window.marked.parse(response);
-    }
-  });
-});
-// fetch('./README.md').then(function(response) {
-//   console.info('[before]response info', response);
-//   response = JSON.stringify(response);
-//   console.info('[after]response info', response);
-//
-//   document.getElementById('content').innerHTML = response;
-//
-// });
+          document.getElementById('content').innerHTML = content;
+          var script = document.createElement('script');
+          script.type = 'text/javascript';
+          script.src = './strapdown/strapdown.js';
+          document.getElementById('ctx').appendChild(script);
+        }
+      }, 5);
 
-</script>
-  </body>
+    </script>
+    <!-- <script type="text/javascript" src="./js/strapdown.js"></script> -->
+
+
 </html>
