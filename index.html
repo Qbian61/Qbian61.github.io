@@ -3,9 +3,19 @@
   <head>
     <meta charset="utf-8">
     <title>Qbian</title>
-    <script type="text/javascript" src="./js/jquery.min.js"></script>
-    <script type="text/javascript">
-    var content = '';
+
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/monokai-sublime.min.css" />
+  </head>
+  <body>
+
+    <article id="content" style="margin: 10px 40px;"></article>
+
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/marked.js"></script>
+    <script src="./js/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script>
     $(function() {
       $.ajax({
         method: 'GET',
@@ -13,31 +23,16 @@
         contentType: 'text/plain',
         success: function(response) {
           // console.info('[before]response info', response);
-          content = response;
+          $('#content').html(window.marked.parse(response));
+
+          setTimeout(function() {
+            $('pre code').each(function(i, block) {
+              hljs.highlightBlock(block);
+            });
+          }, 10);
         }
       });
     });
     </script>
-
-    <xmp id="content" theme="united" style="display:none;"></xmp>
-    <div id="ctx"></div>
-    <script>
-      var interval = setInterval(function() {
-        console.info('set Interval .');
-        if(content != '') {
-          console.info('clear Interval .');
-          window.clearInterval(interval);
-
-          document.getElementById('content').innerHTML = content;
-          var script = document.createElement('script');
-          script.type = 'text/javascript';
-          script.src = './strapdown/strapdown.js';
-          document.getElementById('ctx').appendChild(script);
-        }
-      }, 5);
-
-    </script>
-    <!-- <script type="text/javascript" src="./js/strapdown.js"></script> -->
-
-
+  </body>
 </html>
