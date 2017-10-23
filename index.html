@@ -2,42 +2,36 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Qbian</title>
-    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <title>qbian</title>
+    <link href="./highlight/default.min.css" rel="stylesheet">
+
+    <script src="./js/jquery.min.js"></script>
+    <script src="./highlight/highlight.min.js"></script>
+    <script src="./temp/js/marked.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+  </head>
+  <body>
+    <h1>hello world</h1>
+    <article id="article" class=""></article>
+
+
     <script type="text/javascript">
-    var content = '';
     $(function() {
       $.ajax({
         method: 'GET',
-        url: './mks/qbian-express.md',
+        url: './mks/JS this取值的四种模式.md',
         contentType: 'text/plain',
         success: function(response) {
           // console.info('[before]response info', response);
-          content = response;
+          $('#article').html(window.marked.parse(response));
+
+          $('pre code').each(function(i, block) {
+            hljs.highlightBlock(block);
+          });
         }
       });
     });
     </script>
-
-    <xmp id="content" theme="united" style="display:none;"></xmp>
-    <div id="ctx"></div>
-    <script>
-      var interval = setInterval(function() {
-        console.info('set Interval .');
-        if(content != '') {
-          console.info('clear Interval .');
-          window.clearInterval(interval);
-
-          document.getElementById('content').innerHTML = content;
-          var script = document.createElement('script');
-          script.type = 'text/javascript';
-          script.src = './strapdown/strapdown.js';
-          document.getElementById('ctx').appendChild(script);
-        }
-      }, 5);
-
-    </script>
-    <!-- <script type="text/javascript" src="./js/strapdown.js"></script> -->
-
-
+  </body>
 </html>
