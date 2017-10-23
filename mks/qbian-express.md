@@ -1,174 +1,90 @@
-> 照着node的express框架我自己也封装了一个很简单的拥有基础功能的qbian-express框架。
+# 一、NodeJs执行环境
 
-# 一、项目目录结构：
-```
-- app.js
-- qbian/
-- qbian/index.js
-- qbian/MIME.js
-- static/
-- static/index.html
-- static/login.html
-- static/css/
-- static/css/index.css
-- static/images/
-- static/images/article.svg
-- static/images/favicon.ico
-- static/js/
-- static/js/index.js
-```
+我们都知道在chrome浏览器内JavaScript是在v8上解释执行的，NodeJs就是基于JavaScript环境和语言编写的，它的执行环境也就离不开v8了。放张图来说明一下浏览器和NodeJs执行环境的对比。
 
-# 二、```app.js```文件内容
+![Chrome浏览器和Node的组件构成对比](https://raw.githubusercontent.com/Qbian61/Qbian61.github.io/master/resource/nodejs-v8-gc/Chrome%E6%B5%8F%E8%A7%88%E5%99%A8%E5%92%8CNode%E7%9A%84%E7%BB%84%E4%BB%B6%E6%9E%84%E6%88%90.png)
 
-配置静态资源文件所在位置，默认在```public```文件夹下。
+上图可用看到，在浏览器中因为需要渲染UI界面（HTML,CSS），所以多出来了浏览器的WebKit内核以及底层也会调用到显卡来显示渲染界面。
 
-```
-const http = require('http');
-const fs = require('fs');
-const app = require('./qbian/index');
+而NodeJs的使用场景多是在服务器端，也就是说没有UI界面需要渲染，所以也就不在需要WebKit内核，底层相应的也就不会去调用到显卡驱动。NodeJs的中间层libuv是其支持跨平台运行的关键所在。
 
-// 配置静态资源文件位置，默认在public文件夹
-app.static('./static');
+上图也充分说明了在Chrome浏览器和NodeJs中JavaScript的执行环境都是V8，今天我们要说的重点也就是V8虚拟机的垃圾回收机制。
 
-// 拦截网站logo请求
-app.get('/favicon.ico', (req, res) => {
-  console.info('/favicon.ico');
-  fs.readFile('./static/images/favicon.ico', (err, data) => {
-    if(err) {
-      return res.end('');
-    }
-    res.writeHead(200, {'Content-Type': "image/x-icon"});
-    res.end(data.toString());
-  });
-});
 
-// 拦截 get /index 请求
-app.get('/index', (req, res) => {
-  console.info('GET requestData ===> ', req.requestData);
-  res.send(req.requestData);
-});
+# 二、V8的内存限制
 
-// 拦截 post /index 请求
-app.post('/index', (req, res) => {
-  console.info('POST requestData ===> ', req.requestData);
-  res.send(req.requestData);
-});
+在其它后端语言中，例如java在使用内存时就没限制（可用充分使用物理内存）。但是在JavaScript中，内存的使用就受到了V8虚拟机的限制。因为V8是为Chrome浏览器研发产生的，在浏览器环境内并不会存在使用大量内存的情况，所以V8在内存使用上对不同平台做了相对应的限制：32位操作系统约为0.7GB，64位操作系统约为1.4GB。这也就意味着当我们在操作大文件时（超过该内存限制的文件），无法将文件全部读取到内存中来，相对应的计算机的内存资源也就无法得到充分的使用。
 
-// 拦截 put /index 请求
-app.put('/index', (req, res) => {
-  console.info('PUT requestData ===> ', req.requestData);
-  res.send('e');
-});
+# 三、V8对象分配（堆内存）
 
-// 拦截 delete /index 请求
-app.delete('/index', (req, res) => {
-  console.info('DELETE requestData ===> ', req.requestData);
-  res.send({name: 'lily'});
-});
+了解JVM的人都知道，java中的对象分配是在堆内存中的。V8也不例外，当我们在代码中声明变量并赋值时，所使用对象的内存就分配在堆中。如果已申请的堆空闲内存不够分配新对象时，将继续申请堆内存，直到堆的大小超过V8的限制为止。
 
-// 启动服务器
-http.createServer(app.exec).listen(3000);
+查看堆内存使用情况：
 
 ```
-# 三、访问静态资源  login.html
-
-因为我们配置了静态资源所在位置，所以我们启动服务后就可以直接访问资源位置了，这里我没有在response对象上封装```sendFile```方法，默认就直接访问没有做拦截。
-
-```login.html```文件内容如下:
-
-```
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>login</title>
-  </head>
-  <body>
-    <h1>Login</h1>
-    <form action="index.html" method="get">
-
-      <input type="text">
-      <input type="text">
-      <input type="submit" value="submit">
-    </form>
-
-    <script type="text/javascript" src="../js/index.js"></script>
-  </body>
-</html>
+$ node
+> process.memoryUsage();
+{ rss: 20774912,
+  heapTotal: 7258112,
+  heapUsed: 4225360,
+  external: 9327 }
 ```
 
-```index.js```文件内容如下：
+以上内存限制在Node中也是可用打破的，在启动项目时指定堆内存大小，如下所示：
 
 ```
-alert(1);
+node --max-old-space-size=2048 index.js // 设置老龄代堆内存大小，单位MB
+// 或者
+node --max-new-space-size=1024 index.js // 设置新生代堆内存大小，单位MB
 ```
+以上参数在V8初始化时生效，一旦生效就不能再动态修改。
 
-这里我们访问一下```http://127.0.0.1:3000/login.html```这个地址，结果如下：
+# 四、V8的垃圾回收机制
 
-![http://127.0.0.1:3000/login.html](https://raw.githubusercontent.com/Qbian61/Qbian61.github.io/master/resource/qbian-express/login.png)
+V8的垃圾回收策略主要基于分代垃圾回收机制。在分代回收的基础上，针对新生代和老龄代在其内部又做了相对应的回收算法：新生代内使用的是复制算法、老龄代内使用的是标记－清除算法以及标记－合并算法。
 
-# 四、访问静态资源文件 index.html
+## 1、内存堆内存分配－分代算法
 
-```index.html```文件内容
+![V8的堆内存分代算法](https://raw.githubusercontent.com/Qbian61/Qbian61.github.io/master/resource/nodejs-v8-gc/V8%E7%9A%84%E5%88%86%E4%BB%A3%E5%A0%86%E5%86%85%E5%AD%98.png)
 
-```
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>index</title>
-    <link rel="stylesheet" href="./css/index.css">
-  </head>
-  <body>
-    <h1>Index</h1>
-    <img src="./images/article.svg" alt="" />
-    <form action="login.html" method="get">
-      <input type="text">
-      <input type="text">
-      <input type="submit" value="submit">
-    </form>
-  </body>
-</html>
+将整个堆内存分为新生代和老龄代，新生代内保存的是最新创建且存活周期短的对象。老龄代内保存的是较为活跃且存活周期长的对象。
 
-```
+## 2、复制算法（新生代内存）
 
-```index.css```文件内容
+该算法将内存一分为二，每一部分空间称为semispace。在这两个semispace空间中，只有一个处于使用中，另一个处于闲置状态。正在使用的semispace空间我们称之为From空间，处于闲置的semispace空间我们称之为To空间。当我们分配对象时，先是在From空间进行分配。当新生代内存中开始垃圾回收时，会检查From空间中的存活对象，这些存活对象将被复制到To空间中，而非存活对象占用的空间将被释放。完成复制后，From空间和To空间的角色发生互换，From空间变为To空间，To空间变为From空间。简而言之，在新生代的垃圾回收过程中，就是通过将存活对象在两个semispace空间之间进行复制。如下图所示：
 
-```
+![V8堆内存中新生代内存](https://raw.githubusercontent.com/Qbian61/Qbian61.github.io/master/resource/nodejs-v8-gc/V8%E5%A0%86%E5%86%85%E5%AD%98%E4%B8%AD%E6%96%B0%E7%94%9F%E4%BB%A3%E5%86%85%E5%AD%98.png)
 
-body {
-  background-color: gray;
-}
+复制算法的缺点是只能使用新生代内存中的一半内存空间大小。但复制算法由于只复制存活的对象，并且对于生命周期短的场景存活对象只占少部分，所以它在时间效率上有优异的表现。
 
-```
+由于复制算法是典型的牺牲空间换取时间的算法，所以无法大规模应用在所有的垃圾回收中。但可以发现，复制算法非常适合应用在新生代中，因为新生代中对象的生命周期较短，恰恰适合这个算法。
 
-这里我们访问一下```http://127.0.0.1:3000/index.html```这个地址，结果如下：
+由上图也可以看出，实际在V8中处于使用的内存是新生代一半的内存加上老龄代内存，有一半的新生代内存处于闲置状态。
 
-![这里我们访问一下```http://127.0.0.1:3000/index.html```这个地址，结果如下：](https://raw.githubusercontent.com/Qbian61/Qbian61.github.io/master/resource/qbian-express/index.png)
+我们了解了新生代中的内存空间使用，那什么样的对象会从新生代中晋升到老龄代内存中呢？当一个对象经过多次复制依然存活时，它将会被认为是生命周期较长的对象。这种较长生命周期的对象随后会被移动到老龄代内存中，采用老龄代中新的算法进行管理。
 
-# 五、访问 ```get http://127.0.0.1:3000/index```
+对象从新生代晋升到老龄代的条件主要有两个：一个是对象是否经历过复制算法回收，一个是To空间的内存占用比超过一定的限制。
 
-![get http://127.0.0.1:3000/index](https://raw.githubusercontent.com/Qbian61/Qbian61.github.io/master/resource/qbian-express/get_index.png)
+## 3、标记－清除算法（老龄代内存）
 
-# 六、访问 ```post http://127.0.0.1:3000/index```
+标记清除算法分为两个阶段，一阶段是标记，另一阶段是清除。与复制算法相比，标记－清除算法并不会将内存空间划分为两半，所以不存在浪费一半空间的行为。与复制算法不同的是，标记－清除算法在标记阶段遍历堆中的所有对象，并标记活着的对象，在随后的清除阶段中，只清除没有被标记的对象。可以看出复制算法只复制活着的对象，而标记－清除算法只清理死亡的对象。这是因为活对象在新生代中占较小部分，死对象在老龄代中占较小部分，这也是两种回收方式能高效工作的原因。标记－清除算法的工作图解如下：
 
-![post http://127.0.0.1:3000/index](https://raw.githubusercontent.com/Qbian61/Qbian61.github.io/master/resource/qbian-express/post_index.png)
+![标记－清除算法工作时内存图](https://raw.githubusercontent.com/Qbian61/Qbian61.github.io/master/resource/nodejs-v8-gc/%E6%A0%87%E8%AE%B0%EF%BC%8D%E6%B8%85%E9%99%A4%E7%AE%97%E6%B3%95%E5%B7%A5%E4%BD%9C%E6%97%B6%E5%86%85%E5%AD%98%E5%9B%BE.png)
 
-# 七、访问 ```put http://127.0.0.1:3000/index```
+标记－清除算法最大的问题是在进行一次标记清除回收后，内存空间会出现不连续的状态。这些内存碎片会对后续的内存分配造成问题，因为很可能出现需要分配一个大内存对象的情况，这时无法分配的情况下就会再次触发垃圾回收，而这次的回收是不必要的，这时就该下面的回收算法登场了：标记－合并算法。
 
-![put http://127.0.0.1:3000/index](https://raw.githubusercontent.com/Qbian61/Qbian61.github.io/master/resource/qbian-express/put_index.png)
+## 4、标记－合并算法（老龄代内存）
 
-# 八、访问 ```delete http://127.0.0.1:3000/index```
+上面也说到了标记－清除算法存在的弊端，标记－合并算法就是为了解决这些弊端而设计演变出来的。它们的差别在于对象在标记为死亡后，在整理的过程中，将活着的对象往一端移动，在移动完成后，直接清理掉另一端死亡的对象。完成移动并清理完另一端死亡对象的内存后，老龄代内存空间就是连续的未使用和以使用了，这样就可以进行大内存对象的分配了。
 
-![delete http://127.0.0.1:3000/index](https://raw.githubusercontent.com/Qbian61/Qbian61.github.io/master/resource/qbian-express/delete_index.png)
-
-# 九、访问 ```patch http://127.0.0.1:3000/index```，该方法未处理。
-
-![patch http://127.0.0.1:3000/index](https://raw.githubusercontent.com/Qbian61/Qbian61.github.io/master/resource/qbian-express/404_method.png)
-
-# 九、访问 ```get http://127.0.0.1:3000/index1```，该路径未拦截。 404_page
-
-![get http://127.0.0.1:3000/index1](https://raw.githubusercontent.com/Qbian61/Qbian61.github.io/master/resource/qbian-express/404_page.png)
-
-
-> 源码地址：https://github.com/Qbian61/qbian-express
+## 5、垃圾回收算法比较
+<table class="table table-bordered">
+<thead>
+<tr><th>回收算法</th><th>复制算法</th><th>标记－清除算法</th><th>标记－合并算法</th></tr>
+</thead>
+<tbody>
+<tr><td>速度</td><td>中等</td><td>最慢</td><td>最快</td></tr>
+<tr><td>空间开销</td><td>少（有碎片）</td><td>少（无碎片）</td><td>双倍空间（无碎片）</td></tr>
+<tr><td>是否移动对象</td><td>否</td><td>是</td><td>是</td></tr>
+</tbody>
+</table>

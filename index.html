@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+<<<<<<< HEAD
     <title>qbian</title>
     <link href="./highlight/default.min.css" rel="stylesheet">
 
@@ -17,6 +18,22 @@
 
 
     <script type="text/javascript">
+=======
+    <title>Qbian</title>
+
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/monokai-sublime.min.css" />
+  </head>
+  <body>
+
+    <article id="content" style="margin: 10px 40px;"></article>
+
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/marked.js"></script>
+    <script src="./js/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script>
+>>>>>>> refs/remotes/origin/master
     $(function() {
       $.ajax({
         method: 'GET',
@@ -24,11 +41,21 @@
         contentType: 'text/plain',
         success: function(response) {
           // console.info('[before]response info', response);
+<<<<<<< HEAD
           $('#article').html(window.marked.parse(response));
 
           $('pre code').each(function(i, block) {
             hljs.highlightBlock(block);
           });
+=======
+          $('#content').html(window.marked.parse(response));
+
+          setTimeout(function() {
+            $('pre code').each(function(i, block) {
+              hljs.highlightBlock(block);
+            });
+          }, 10);
+>>>>>>> refs/remotes/origin/master
         }
       });
     });
