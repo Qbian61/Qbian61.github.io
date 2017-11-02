@@ -12,8 +12,24 @@
 
   </head>
   <body>
-    <h1>hello world</h1>
+    <!-- <h1>hello world</h1> -->
     <article id="article" class=""></article>
+
+    <div id="container"></div>
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    <script>
+    var gitment = new Gitment({
+      // id: '页面 ID', // 可选。默认为 location.href
+      owner: 'Qbian61',
+      repo: 'Qbian61.github.io',
+      oauth: {
+        client_id: '35ce006293e40619b777',
+        client_secret: '8228975f4b9a1da3c42342e539231d4e9cd99b5d'
+      },
+    })
+    gitment.render('container')
+    </script>
 
 
     <script type="text/javascript">
