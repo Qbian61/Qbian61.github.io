@@ -12,6 +12,10 @@
 
   </head>
   <body>
+    <ul class="article-list">
+      <li>JS this取值的四种模式</li>
+      <li>qbian-express</li>
+    </ul>
     <!-- <h1>hello world</h1> -->
     <article id="article" class=""></article>
 
@@ -19,37 +23,57 @@
     <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
     <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
     <script>
-    var gitment = new Gitment({
-      // id: '页面 ID', // 可选。默认为 location.href
-      owner: 'Qbian61',
-      repo: 'Qbian61.github.io',
-      oauth: {
-        client_id: '35ce006293e40619b777',
-        client_secret: '8228975f4b9a1da3c42342e539231d4e9cd99b5d'
-      },
-    })
-    gitment.render('container')
+
     </script>
 
 
     <script type="text/javascript">
 
     $(function() {
-      $.ajax({
-        method: 'GET',
-        url: './mks/JS this取值的四种模式.md',
-        contentType: 'text/plain',
-        success: function(response) {
-          // console.info('[before]response info', response);
-          $('#article').html(window.marked.parse(response));
+      $('.article-list > li').on('click', function() {
+        console.info($(this).html());
 
-          setTimeout(function() {
-            $('pre code').each(function(i, block) {
-              hljs.highlightBlock(block);
-            });
-          }, 10);
-        }
+        fetchArticle($(this).html());
       });
+
+      fetchArticle('JS this取值的四种模式');
+
+      function fetchArticle(name) {
+        // JS this取值的四种模式
+        $.ajax({
+          method: 'GET',
+          url: './mks/' + name + '.md',
+          contentType: 'text/plain',
+          success: function(response) {
+            // console.info('[before]response info', response);
+            // 解析 md 文件
+            $('#article').html(window.marked.parse(response));
+
+            // 添加评论
+            addMent(name);
+
+            // 添加样式
+            setTimeout(function() {
+              $('pre code').each(function(i, block) {
+                hljs.highlightBlock(block);
+              });
+            }, 10);
+          }
+        });
+      }
+
+      function addMent(articleId) {
+        var gitment = new Gitment({
+          id: location.href + articleId, // 可选。默认为 location.href
+          owner: 'Qbian61',
+          repo: 'Qbian61.github.io',
+          oauth: {
+            client_id: '35ce006293e40619b777',
+            client_secret: '8228975f4b9a1da3c42342e539231d4e9cd99b5d'
+          },
+        });
+        gitment.render('container');
+      }
     });
     </script>
   </body>
