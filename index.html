@@ -1,80 +1,50 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>qbian</title>
-    <link href="./highlight/default.min.css" rel="stylesheet">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <script src="./js/jquery.min.js"></script>
-    <script src="./highlight/highlight.min.js"></script>
-    <script src="./temp/js/marked.js"></script>
+    <title>Qbian</title>
+
+    <!-- bootstrap -->
+    <link href="./dep/bootstrap/bootstrap.min.css" rel="stylesheet">
+
+    <!-- highlight -->
+    <link href="./dep/highlight/default.min.css" rel="stylesheet">
+
+    <!-- gitment -->
+    <link href="./dep/gitment/gitment.css" rel="stylesheet">
+
+    <!-- index.css -->
+    <link href="./assets/css/index.css" rel="stylesheet">
+
+</head>
+<body>
+
+    <img src="./assets/imgs/logo.jpeg" alt="logo">
+
+
+
+
+
+
+    <!-- jquery -->
+    <script src="./dep/jquery/jquery.min.js" charset="utf-8"></script>
+
+    <!-- highlight -->
+    <script src="./dep/highlight/highlight.min.js" charset="utf-8"></script>
     <script>hljs.initHighlightingOnLoad();</script>
 
-  </head>
-  <body>
-    <ul class="article-list">
-      <li>JS this取值的四种模式</li>
-      <li>qbian-express</li>
-    </ul>
-    <!-- <h1>hello world</h1> -->
-    <article id="article" class=""></article>
+    <!-- marked -->
+    <script src="./dep/marked/marked.js" charset="utf-8"></script>
 
-    <div id="container"></div>
-    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-    <script>
+    <!-- gitment -->
+    <script src="./dep/gitment/gitment.browser.js" charset="utf-8"></script>
 
-    </script>
+    <!-- index.js -->
+    <script src="./assets/js/index.js" charset="utf-8"></script>
 
 
-    <script type="text/javascript">
-
-    $(function() {
-      $('.article-list > li').on('click', function() {
-        console.info($(this).html());
-
-        fetchArticle($(this).html());
-      });
-
-      fetchArticle('JS this取值的四种模式');
-
-      function fetchArticle(name) {
-        // JS this取值的四种模式
-        $.ajax({
-          method: 'GET',
-          url: './mks/' + name + '.md',
-          contentType: 'text/plain',
-          success: function(response) {
-            // console.info('[before]response info', response);
-            // 解析 md 文件
-            $('#article').html(window.marked.parse(response));
-
-            // 添加评论
-            addMent(name);
-
-            // 添加样式
-            setTimeout(function() {
-              $('pre code').each(function(i, block) {
-                hljs.highlightBlock(block);
-              });
-            }, 10);
-          }
-        });
-      }
-
-      function addMent(articleId) {
-        var gitment = new Gitment({
-          id: location.href + articleId, // 可选。默认为 location.href
-          owner: 'Qbian61',
-          repo: 'Qbian61.github.io',
-          oauth: {
-            client_id: '35ce006293e40619b777',
-            client_secret: '8228975f4b9a1da3c42342e539231d4e9cd99b5d'
-          },
-        });
-        gitment.render('container');
-      }
-    });
-    </script>
-  </body>
+</body>
 </html>
