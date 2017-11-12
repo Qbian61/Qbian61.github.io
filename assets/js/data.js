@@ -89,7 +89,7 @@ window.qbian.categories = window.qbian.categories || {};
                 category: 'JavaScript',
                 created: '2017-09-29',
                 desc: 'js中的 this 在四种不同情况下会有不同的取值方式，具体的四种取值方式都是啥？',
-                tags: [tags.javaScript],
+                tags: [tags.javaScript, tags.angular, tags.designPattern],
                 path: './src/mds/JavaScript/JS this取值的四种模式.md'
             }]
         },

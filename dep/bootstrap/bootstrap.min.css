@@ -29,14 +29,9 @@ body{
   line-height: 1.7;
 }
 
-/*pre{
-  padding: 15px;
-  border-radius: 0px;
-  word-wrap: normal;
-  word-break: break-word;
-  overflow: auto;
-  white-space: pre;
-}*/
+pre{
+  padding: 2.5px !important;
+}
 
 .box{
   border: 1px solid #00a9e5;
