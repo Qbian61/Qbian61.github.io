@@ -10,15 +10,15 @@ $(function() {
 
             category = window.qbian.categories[key];
 
-            html += '<ul>';
+            html += '<div class="category">';
 
             if(category.articles.length === 0) {
 
-                html += '<li>该类别 '+ category.title +' 暂无内容！</li>';
+                // html += '<p>该类别 '+ category.title +' 暂无内容！</p>';
 
             } else {
 
-                html += '<li>类别名称：<h3>'+ category.title +'</h3></li>';
+                html += '<h3>'+ category.title +'</h3>';
                 html += '<ol>';
 
                 for(var i = 0, len = category.articles.length; i < len; ++ i) {
@@ -28,7 +28,7 @@ $(function() {
                 html += '</ol>';
 
             }
-            html += '</ul>';
+            html += '</div>';
         }
 
         /**
