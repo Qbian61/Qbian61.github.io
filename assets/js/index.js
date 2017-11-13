@@ -18,12 +18,14 @@ $(function() {
 
             } else {
 
-                html += '<li>类别名称：'+ category.title +'</li>';
+                html += '<li>类别名称：<h3>'+ category.title +'</h3></li>';
+                html += '<ol>';
 
                 for(var i = 0, len = category.articles.length; i < len; ++ i) {
-                    html += '<li>文章标题：《<a class="article" data-path="' + category.articles[i].path
+                    html += '<li>《<a class="article" data-path="' + category.articles[i].path
                         +'" data-category="'+ key +'" data-index="'+ i +'">'+ category.articles[i].title +'</a>》</li>';
                 }
+                html += '</ol>';
 
             }
             html += '</ul>';
