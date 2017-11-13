@@ -91,6 +91,13 @@ window.qbian.categories = window.qbian.categories || {};
                 desc: 'js中的 this 在四种不同情况下会有不同的取值方式，具体的四种取值方式都是啥？',
                 tags: [tags.javaScript, tags.angular, tags.designPattern],
                 path: './src/mds/JavaScript/JS this取值的四种模式.md'
+            },{
+                title: 'JavaScript exec()',
+                category: 'JavaScript',
+                created: '2017-09-26',
+                desc: 'js 中正则表达式的使用及其需要注意的细节，使用不好就死循环了 ~~！',
+                tags: [tags.javaScript, tags.gossip],
+                path: './src/mds/JavaScript/JavaScript exec().md'
             }]
         },
         mq: {
@@ -120,7 +127,14 @@ window.qbian.categories = window.qbian.categories || {};
             desc: '随便聊聊',
             img: './resource/category-logo/杂谈.jpeg',
             readme: '',
-            articles: []
+            articles: [{
+                title: '微信分享',
+                category: '杂谈',
+                created: '2017-10-23',
+                desc: '好多情况下我们会将高质量的网页分享给微信好友或分享到朋友圈供更多的朋友看到。这里就需要用到微信提供的jssdk的分享接口了。今天刚好做了这功能，期间也遇到了一些坑，在这里纪录一下。',
+                tags: [tags.javaScript, tags.gossip],
+                path: './src/mds/杂谈/微信分享.md'
+            }]
         },
         // 设计模式
         designPattern: {
