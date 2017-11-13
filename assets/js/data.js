@@ -98,6 +98,34 @@ window.qbian.categories = window.qbian.categories || {};
                 desc: 'js 中正则表达式的使用及其需要注意的细节，使用不好就死循环了 ~~！',
                 tags: [tags.javaScript, tags.gossip],
                 path: './src/mds/JavaScript/JavaScript exec().md'
+            },{
+                title: 'JS Object 方法讲解',
+                category: 'JavaScript',
+                created: '2017-09-09',
+                desc: 'js Object 存在可直接调用的方法。',
+                tags: [tags.javaScript, tags.gossip],
+                path: './src/mds/JavaScript/JS Object 方法讲解.md'
+            },{
+                title: 'JavaScript原型',
+                category: 'JavaScript',
+                created: '2017-06-19',
+                desc: 'js 原型链及其继承。',
+                tags: [tags.javaScript, tags.gossip],
+                path: './src/mds/JavaScript/JavaScript原型.md'
+            },{
+                title: 'AngularJs服务讲解',
+                category: 'JavaScript',
+                created: '2017-06-19',
+                desc: 'angular 中四种服务的定义。',
+                tags: [tags.javaScript, tags.angular],
+                path: './src/mds/JavaScript/AngularJs服务讲解.md'
+            },{
+                title: 'commonJs（serverJs），AMD，CMD比较',
+                category: 'JavaScript',
+                created: '2017-06-15',
+                desc: '谈谈 js 中的模块化。',
+                tags: [tags.javaScript],
+                path: './src/mds/JavaScript/commonJs（serverJs），AMD，CMD比较.md'
             }]
         },
         mq: {
